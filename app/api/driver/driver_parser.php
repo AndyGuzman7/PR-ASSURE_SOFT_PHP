@@ -26,6 +26,7 @@ class DriverParser implements Parser {
             $json['license'],          
             $json['ci'],
             $json['picture'],
+            $json['ownerId'],
             $json['email'],
             $json['password'],
             0
