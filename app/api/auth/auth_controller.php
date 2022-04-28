@@ -10,12 +10,14 @@ $authDao = new AuthDAO();
 
 switch($requestMethod) {
 	case 'GET':
+		
 		$email = $_GET['email'];
 		$password = $_GET['password'];
 		$authDao->logIn($email, $password);
 		break;
 	case 'POST':
 		$jsonUser = json_decode(file_get_contents("php://input"), true);
+		
         $user = $parser->parse($jsonUser);
 		$authDao->signUpClient($user);
 		break;
