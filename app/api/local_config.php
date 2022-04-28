@@ -5,9 +5,9 @@
         //Obtiene la conexion a la BD
         public static function GetConnection(){
             $server = 'localhost';
-            $username = 'sofi-aws';
-            $password = 'Hemmo1996';
-            $database = 'db_taxi_segurito';
+            $username = 'root';
+            $password = 'Univalle';
+            $database = 'DBTaxiSegurito';
             
             $conn = "mysql:host=$server;dbname=$database";
             $options=[
