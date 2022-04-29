@@ -7,7 +7,7 @@
             $server = 'localhost';
             $username = 'root';
             $password = 'Univalle';
-            $database = 'DBTaxiSegurito';
+            $database = 'dbtaxisegurito';
             
             $conn = "mysql:host=$server;dbname=$database";
             $options=[
