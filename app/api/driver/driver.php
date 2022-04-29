@@ -22,7 +22,11 @@ class Driver implements \JsonSerializable
     protected string $email;
     protected string $password;
 
-    public function __construct2($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $status = 1)
+    protected string $username;
+   
+    protected string $role;
+
+    public function __construct($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $status = 1)
     {
         $this->id = $id;
         $this->fullname = $fullname;
@@ -32,6 +36,21 @@ class Driver implements \JsonSerializable
         $this->picture = $picture;
         $this->ownerId = $ownerId;
         $this->status = $status;
+    }
+    public function __construct2($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $status = 1,$username,$password,$role)
+    {
+        $this->id = $id;
+        $this->fullname = $fullname;
+        $this->cellphone = $cellphone;
+        $this->license = $license;
+        $this->ci = $ci;
+        $this->picture = $picture;
+        $this->ownerId = $ownerId;
+        $this->status = $status;
+        
+        $this->username = $username;
+        $this->password = $password;
+        $this->role = $role;
     }
 
      public function __construct1($id, $fullname, $cellphone, $license, $ci)
@@ -70,9 +89,10 @@ class Driver implements \JsonSerializable
             'ci' => $this->ci,
             'picture' => $this->picture,
             'ownerId' => $this->ownerId,
-            'email' => $this->email,
-            'password' => $this->password,
             'status' => $this->status,
+            'username' => $this->username,
+            'password'=> $this->password,
+            'role' => $this->role
         ];
     }
 
@@ -82,6 +102,30 @@ class Driver implements \JsonSerializable
 
     public function setId($id) {
         $this->id = $id;
+    }
+
+    public function setUsername($username){
+        $this->username = $username;
+    }
+
+    public function setPassword($password){
+        $this->password = $password;
+    }
+
+    public function setRole($role){
+        $this->role = $role;
+    }
+
+    public function getUsername(){
+        return $this->username;
+    }
+
+    public function getPassword(){
+        return $this->password;
+    }
+
+    public function getRole(){
+        return $this->role;
     }
 
     public function getFullname() {
@@ -112,11 +156,4 @@ class Driver implements \JsonSerializable
         return $this->ownerId;
     }
 
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public function getPassword(){
-        return $this->password;
-    }
 }
