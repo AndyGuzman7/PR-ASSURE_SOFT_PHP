@@ -19,9 +19,11 @@ class Driver implements \JsonSerializable
     protected string $picture;
     protected int $status;
     protected int $ownerId;
+    protected string $email;
+    protected string $password;
 
     protected string $username;
-    protected string $password;
+   
     protected string $role;
 
     public function __construct($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $status = 1)
@@ -58,6 +60,20 @@ class Driver implements \JsonSerializable
         $this->cellphone = $cellphone;
         $this->license = $license;
         $this->ci = $ci;       
+    }
+
+    public function __construct($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $email, $password, $status = 1)
+    {
+        $this->id = $id;
+        $this->fullname = $fullname;
+        $this->cellphone = $cellphone;
+        $this->license = $license;
+        $this->ci = $ci;
+        $this->picture = $picture;
+        $this->ownerId = $ownerId;
+        $this->email = $email;
+        $this->password = $password;
+        $this->status = $status;
     }
 
     /**

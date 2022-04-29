@@ -7,7 +7,11 @@
             $server = 'localhost';
             $username = 'root';
             $password = 'Univalle';
+<<<<<<< HEAD
             $database = 'dbtaxisegurito';
+=======
+            $database = 'id17644419_dbtaxisegurito';
+>>>>>>> 1ce2967ca7e7a7feae1a07c6bbe54d1b7e542ef5
             
             $conn = "mysql:host=$server;dbname=$database";
             $options=[

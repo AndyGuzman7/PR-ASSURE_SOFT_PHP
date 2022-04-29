@@ -25,8 +25,8 @@ class DriverDAO {
             VALUES (:fullname, :cellphone, NOW())";
         
         $insertDriver = "INSERT INTO driver
-            (iddriver, license, ci, photo, updateDate, owner_idowner)
-            VALUES (:iddriver, :license, :ci, :photo, NOW(), :ownerId)";
+            (iddriver, license, ci, photo, updateDate, email, password, owner_idowner)
+            VALUES (:iddriver, :license, :ci, :photo, NOW(), :email, MD5(:password), :ownerId)";
 
         $paramsPerson = [
             'fullname' => $driver->getFullname(),
@@ -40,14 +40,16 @@ class DriverDAO {
             $stmtPerson->execute($paramsPerson);
             
             $driver->setId($this->pdo->lastInsertId());
-
+            
             $stmtDriver = $this->pdo->prepare($insertDriver);
             $stmtDriver->execute([
                 'iddriver' => $driver->getId(),
                 'license' => $driver->getLicense(),
                 'ci' => $driver->getCi(),
                 'photo' => $driver->getPicture(),
-                'ownerId' => $driver->getOwnerId()
+                'email' => $driver->getEmail(),
+                'password' => $driver->getPassword(),
+                'ownerId' => $driver->getOwnerId(),
             ]);
             
             $this->pdo->commit();
@@ -73,7 +75,9 @@ class DriverDAO {
             d.ci AS 'ci',
             d.photo AS 'picture',
             d.owner_idowner AS 'ownerId',
-            d.status AS 'status'
+            d.status AS 'status',
+            d.email AS 'email',
+            d.password AS 'password'
         FROM driver d
         INNER JOIN person p ON d.iddriver = p.idPerson
         WHERE d.owner_idowner = :ownerId AND p.status = 1";
@@ -101,11 +105,13 @@ class DriverDAO {
             d.iddriver AS 'id',
             p.fullName AS 'fullName',
             p.cellphone AS 'cellphone',
-            d.license AS 'license',
+             d.license AS 'license',
             d.ci AS 'ci',
             d.photo AS 'picture',
             d.owner_idowner AS 'ownerId',
-            d.status AS 'status'
+            d.status AS 'status',
+            d.email AS 'email',
+            d.password AS 'password'
         FROM driver d
         INNER JOIN person p ON d.iddriver = p.idPerson
         WHERE (p.fullName LIKE :nameCriteria OR d.ci LIKE :ciCriteria)
@@ -144,6 +150,8 @@ class DriverDAO {
                 $row['ci'],
                 $row['picture'],
                 $row['ownerId'],
+                $row['email'],
+                $row['password'],
                 $row['status']
             ));
         }
@@ -178,7 +186,9 @@ class DriverDAO {
         $queryDriver = "UPDATE driver SET
                 license =:license,
                 ci = :ci,
-                photo = :picture
+                photo = :picture,
+                email = :email,
+                password = :password
             WHERE iddriver = :iddriver";
 
         $paramsPerson = [
@@ -191,7 +201,9 @@ class DriverDAO {
             'ci' => $driver->getCi(),
             'license' => $driver->getLicense(),
             'picture' => $driver->getPicture(),
-            'iddriver' => $driver->getId() 
+            'iddriver' => $driver->getId(),
+            'email' => $driver->getEmail(),
+            'password' => $driver->getPassword()
         ];
 
         try {
