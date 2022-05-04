@@ -6,7 +6,7 @@
         public static function GetConnection(){
             $server = 'localhost';
             $username = 'root';
-            $password = 'Univalle';
+            $password = 'JGPAndia1';
             $database = 'id17644419_dbtaxisegurito';
             
             $conn = "mysql:host=$server;dbname=$database";
