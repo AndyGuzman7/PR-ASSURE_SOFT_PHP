@@ -6,7 +6,7 @@ class OwnerParser implements Parser {
     public function parse($json) {
         return new Owner(
             null,
-            $json['fullname'],
+            $json['fullName'],
             $json['cellphone'],
             $json['email'],
             $json['password'],

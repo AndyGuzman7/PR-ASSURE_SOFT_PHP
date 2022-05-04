@@ -21,7 +21,7 @@ try {
       INSERT INTO `user`
         (`idUser`, `email`,`password`, `idrolUser` , `updateDate`)
       VALUES
-        (:idUser, :email ,:password , 3, current_timestamp)
+        (:idUser, :email ,:password , 27, current_timestamp)
   ";
   $insertSql3 = "
       INSERT INTO `owner`

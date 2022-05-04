@@ -48,7 +48,7 @@ class OwnerDAO {
             return "success";
         }
         catch(Exception $e) {
-            http_response_code(503);
+            http_response_code(404);
             $this->pdo->rollBack();
             return $e;
         }
