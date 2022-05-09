@@ -159,6 +159,37 @@ class DriverDAO {
         return $drivers;
     }
 
+    public function getDriverById($iddriver) {
+        $query = "SELECT
+            d.iddriver AS 'id',
+            p.fullName AS 'fullName',
+            p.cellphone AS 'cellphone',
+             d.license AS 'license',
+            d.ci AS 'ci',
+            d.photo AS 'picture',
+            d.owner_idowner AS 'ownerId',
+            d.status AS 'status',
+            d.email AS 'email',
+            d.password AS 'password'
+        FROM driver d
+        INNER JOIN person p ON d.iddriver = p.idPerson
+        WHERE d.iddriver = :iddriver AND p.status = 1";
+
+        $params = [
+            'iddriver' => $iddriver
+        ];
+
+        try {
+            $result = $this->pdo->prepare($query);
+            $result->execute($params);
+            return $this->getDriversAsArray($result);
+        }
+        catch (\Exception $e) {
+            http_response_code(503);
+            return $e;
+        }
+    }
+
     public function delete($iddriver) {
         $query = "UPDATE person SET
             status = 0,

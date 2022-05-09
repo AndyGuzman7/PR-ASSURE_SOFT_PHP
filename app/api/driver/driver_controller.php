@@ -29,6 +29,9 @@ switch($requestMethod) {
                 echo json_encode($driverDAO->getDriversByOwner($ownerId));
             }
         }
+        elseif(!empty($_GET['iddriver'])){
+            echo json_encode($driverDAO->getDriverById($_GET['iddriver']));   
+        }
         break;
     case 'POST':
         $jsonDriver = json_decode(file_get_contents("php://input"), true);
