@@ -12,7 +12,7 @@ switch($requestMethod) {
 	case 'GET':
 		$email = $_GET['email'];
 		$password = $_GET['password'];
-		print($email);
+	
 		$authDriverDao->logInDriver($email, $password);
 		break;
 	
