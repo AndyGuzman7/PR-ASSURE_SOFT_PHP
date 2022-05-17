@@ -21,10 +21,12 @@ class Driver implements \JsonSerializable
     protected int $ownerId;
     protected string $email;
     protected string $password;
+
+    protected string $username;
+   
     protected string $role;
 
-    
-    public function __construct($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $email, $password, $role, $status = 1)
+    public function __construct($id, $fullname, $cellphone, $license, $ci, $picture, $ownerId, $status = 1)
     {
         $this->id = $id;
         $this->fullname = $fullname;
@@ -78,7 +80,7 @@ class Driver implements \JsonSerializable
             'picture' => $this->picture,
             'ownerId' => $this->ownerId,
             'status' => $this->status,
-            'email' => $this->email,
+            'username' => $this->username,
             'password'=> $this->password,
             'role' => $this->role
         ];
@@ -136,11 +138,4 @@ class Driver implements \JsonSerializable
         return $this->ownerId;
     }
 
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public function getPassword(){
-        return $this->password;
-    }
 }
