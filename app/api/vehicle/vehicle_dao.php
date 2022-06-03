@@ -53,6 +53,25 @@ class VehicleDAO {
         }
     }
 
+    public function getVehicleByLastDriver($iddriver) {
+        $query = "SELECT V.idVehicle AS 'id', V.color, V.model, V.pleik, V.capacity,
+            V.photo AS 'picture', V.owner_idowner AS 'ownerId'
+        FROM vehicle V
+        INNER JOIN driver_has_vehicle DV ON V.idVehicle = DV.vehicle_idVehicle
+        INNER JOIN driver D ON D.iddriver = DV.driver_iddriver
+        WHERE V.status = 1 AND DV.state = 1 AND D.iddriver = :iddriver";
+        $params = ['iddriver' => $iddriver];
+        try {
+            $result = $this->pdo->prepare($query);
+            $result->execute($params);
+            return $this->getVehiclesAsArray($result);
+        }
+        catch (Exception $e) {
+            http_response_code(503);
+            return $e;
+        }
+    }
+
     public function updateVehicle($vehicle) {
         $query = "UPDATE vehicle SET
             color = :color,

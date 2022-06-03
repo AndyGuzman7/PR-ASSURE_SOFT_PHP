@@ -13,6 +13,10 @@ switch ($requestMethod) {
             $ownerId = $_GET['ownerId'];
             echo json_encode($vehicleDAO->getVehiclesByOwner($ownerId));
         }
+        elseif(!empty($_GET['iddriver'])){
+            $iddriver = $_GET['iddriver'];
+            echo json_encode($vehicleDAO->getVehicleByLastDriver($iddriver));
+        }
         else {
             echo json_encode($vehicleDAO->getAll());
         }
